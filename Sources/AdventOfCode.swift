@@ -1,6 +1,10 @@
 import ArgumentParser
 
-let days: [DailySolvable] = []
+let days: [DailySolvable] = [
+    Day1(),
+    Day2(),
+    Day3()
+]
 
 @main
 struct AdventOfCode: ParsableCommand {
@@ -9,7 +13,7 @@ struct AdventOfCode: ParsableCommand {
     var day: Int?
 
     func run() throws {
-        print("Advent Of Code!")
+        print("Advent Of Code 2024!")
 
         if let day {
             if let runningDay = days.first(where: { $0.day == day }) {
