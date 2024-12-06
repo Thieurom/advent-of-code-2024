@@ -67,7 +67,7 @@ struct Day4: DailySolvable {
 
         return count
     }
-    
+
     func answerPart2() -> Int {
         guard matrix.count >= 3, matrix[0].count >= 3 else { return 0 }
 
@@ -75,12 +75,12 @@ struct Day4: DailySolvable {
 
         for i in (1 ..< matrix.count - 1) {
             for j in (1 ..< matrix[i].count - 1) {
-               let diag1 = [(i - 1, j - 1), (i, j), (i + 1, j + 1)]
+                let diag1 = [(i - 1, j - 1), (i, j), (i + 1, j + 1)]
                     .map { matrix[$0.0][$0.1] }
                     .joined()
                 let diag2 = [(i - 1, j + 1), (i, j), (i + 1, j - 1)]
-                     .map { matrix[$0.0][$0.1] }
-                     .joined()
+                    .map { matrix[$0.0][$0.1] }
+                    .joined()
                 if xDashMas.contains(diag1) && xDashMas.contains(diag2) {
                     count += 1
                 }
