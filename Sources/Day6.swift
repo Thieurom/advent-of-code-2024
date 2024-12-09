@@ -22,12 +22,6 @@ enum Direction: String {
     }
 }
 
-struct Point: Hashable {
-
-    var x: Int
-    var y: Int
-}
-
 struct Position: Hashable {
 
     var point: Point
@@ -82,10 +76,10 @@ struct Day6: DailySolvable {
 
         guard var guardPosition,
               guardPosition.heading.rawValue != obstacle,
-              map.isValidPoint(guardPosition.point) else { return 0 }
+              guardPosition.point.inBounds(width: map.count, height: map[0].count) else { return 0 }
         var points: Set<Point> = [guardPosition.point]
 
-        while map.isValidPoint(guardPosition.nextPoint()) {
+        while guardPosition.nextPoint().inBounds(width: map.count, height: map[0].count) {
             let nextPoint = guardPosition.nextPoint()
             if map[nextPoint.y][nextPoint.x] == obstacle {
                 guardPosition.turn()
@@ -112,10 +106,10 @@ struct Day6: DailySolvable {
 
         guard var guardPosition = initialGuardPosition,
               guardPosition.heading.rawValue != obstacle,
-              map.isValidPoint(guardPosition.point) else { return 0 }
+              guardPosition.point.inBounds(width: map.count, height: map[0].count) else { return 0 }
         var points: Set<Point> = [guardPosition.point]
 
-        while map.isValidPoint(guardPosition.nextPoint()) {
+        while guardPosition.nextPoint().inBounds(width: map.count, height: map[0].count) {
             let nextPoint = guardPosition.nextPoint()
             if map[nextPoint.y][nextPoint.x] == obstacle {
                 guardPosition.turn()
@@ -139,7 +133,7 @@ struct Day6: DailySolvable {
             }
             var positions: Set<Position> = [position]
 
-            while newMap.isValidPoint(position.nextPoint()) {
+            while position.nextPoint().inBounds(width: newMap.count, height: newMap[0].count) {
                 let nextPoint = position.nextPoint()
                 if newMap[nextPoint.y][nextPoint.x] == obstacle {
                     position.turn()
@@ -157,13 +151,5 @@ struct Day6: DailySolvable {
         }
 
         return obstacles
-    }
-}
-
-extension Array where Element == Array<String> {
-
-    fileprivate func isValidPoint(_ point: Point) -> Bool {
-        guard !isEmpty else { return false }
-        return point.x >= 0 && point.y >= 0 && point.x < count && point.y < self[0].count
     }
 }
