@@ -5,23 +5,6 @@
 //  Created by Doan Thieu on 6/12/24.
 //
 
-enum Direction: String {
-
-    case north = "^"
-    case south = ">"
-    case east = "v"
-    case west = "<"
-
-    func turn() -> Direction {
-        switch self {
-        case .north: return .east
-        case .east: return .south
-        case .south: return .west
-        case .west: return .north
-        }
-    }
-}
-
 struct Position: Hashable {
 
     var point: Point
